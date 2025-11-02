@@ -1,34 +1,33 @@
 import { Component } from '@angular/core';
+import { IonicModule, IonInput, IonButton, IonItem, IonLabel, IonText } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule, ReactiveFormsModule],
 })
 export class LoginPage {
-  usuario: string = '';
-  password: string = '';
+  loginForm: FormGroup;
 
-  constructor(private router: Router, private alertCtrl: AlertController) {}
+  constructor(private fb: FormBuilder, private router: Router) {
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(8)]],
+      password: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]], // 4 dígitos
+    });
+  }
 
-  async ingresar() {
-    const usuarioValido = /^[a-zA-Z0-9]{3,8}$/.test(this.usuario);
-    const passwordValida = /^[0-9]{4}$/.test(this.password);
-
-    if (!usuarioValido || !passwordValida) {
-      const alerta = await this.alertCtrl.create({
-        header: 'Datos inválidos',
-        message:
-          'El usuario debe tener entre 3 y 8 caracteres alfanuméricos y la contraseña debe ser numérica de 4 dígitos.',
-        buttons: ['OK'],
-      });
-      await alerta.present();
-      return;
+  login() {
+    if (this.loginForm.valid) {
+      const user = this.loginForm.value.username;
+      // Navegar al Home y pasar el usuario
+      this.router.navigate(['/home'], { state: { user } });
+    } else {
+      this.loginForm.markAllAsTouched();
     }
-
-    // Si es válido, redirige al Home con el usuario
-    this.router.navigate(['/home'], { state: { usuario: this.usuario } });
   }
 }

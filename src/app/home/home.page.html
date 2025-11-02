@@ -1,57 +1,48 @@
-<ion-header [translucent]="true">
+<!-- src/app/home/home.page.html -->
+
+<ion-header>
   <ion-toolbar>
     <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h2 *ngIf="usuario">Bienvenido, {{ usuario }} 👋</h2>
-</ion-content>
 
-<ion-content class="ion-padding" [fullscreen]="true">
-  <h2 class="ion-text-center">Bienvenida</h2>
+  <h2>Bienvenido, {{ username }}</h2>
 
-  <!-- Mostrar usuario recibido desde Login -->
-  <ion-card *ngIf="username">
-    <ion-card-header>
-      <ion-card-title>Usuario ingresado</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <strong>{{ username }}</strong>
-    </ion-card-content>
-  </ion-card>
+  <!-- Nombre -->
+  <ion-item [@slideInput]="animarNombre ? 'end' : 'start'">
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="nombre"></ion-input>
+  </ion-item>
 
-  <!-- Formulario de información adicional -->
-  <form #homeForm="ngForm">
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input #nombreInput type="text" [(ngModel)]="model.nombre" name="nombre"></ion-input>
-    </ion-item>
+  <!-- Apellido -->
+  <ion-item [@slideInput]="animarApellido ? 'end' : 'start'">
+    <ion-label position="floating">Apellido</ion-label>
+    <ion-input [(ngModel)]="apellido"></ion-input>
+  </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Apellido</ion-label>
-      <ion-input #apellidoInput type="text" [(ngModel)]="model.apellido" name="apellido"></ion-input>
-    </ion-item>
+  <!-- Nivel educación -->
+  <ion-item>
+    <ion-label position="floating">Nivel de educación</ion-label>
+    <ion-input [(ngModel)]="nivel"></ion-input>
+  </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Nivel de educación</ion-label>
-      <ion-select [(ngModel)]="model.educacion" name="educacion">
-        <ion-select-option value="Basica">Básica</ion-select-option>
-        <ion-select-option value="Media">Media</ion-select-option>
-        <ion-select-option value="Tecnica">Técnica</ion-select-option>
-        <ion-select-option value="Universitaria">Universitaria</ion-select-option>
-      </ion-select>
-    </ion-item>
+  <!-- Fecha de nacimiento -->
+  <mat-form-field appearance="fill" style="width: 100%; margin-top: 15px;">
+    <mat-label>Fecha de Nacimiento</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="fechaNacimiento">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
 
-    <!-- Fecha Nacimiento - inicialmente con ion-datetime -->
-    <ion-item>
-      <ion-label position="floating">Fecha de Nacimiento</ion-label>
-      <ion-datetime display-format="DD/MM/YYYY" [(ngModel)]="model.fechaNacimiento" name="fechaNacimiento"></ion-datetime>
-    </ion-item>
+  <!-- Botones -->
+  <ion-button expand="block" color="medium" (click)="limpiarCampos()" style="margin-top: 20px;">
+    Limpiar
+  </ion-button>
 
-    <div class="ion-margin-top">
-      <ion-button expand="block" (click)="onLimpiar()">Limpiar</ion-button>
-      <ion-button expand="block" color="primary" (click)="onMostrar()">Mostrar</ion-button>
-    </div>
-  </form>
+  <ion-button expand="block" color="primary" (click)="mostrarDatos()">
+    Mostrar
+  </ion-button>
+
 </ion-content>

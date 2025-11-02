@@ -5,29 +5,24 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-  <ion-item>
-    <ion-label position="stacked">Usuario</ion-label>
-    <ion-input
-      [(ngModel)]="usuario"
-      type="text"
-      maxlength="8"
-      minlength="3"
-      placeholder="Ingresa tu usuario">
-    </ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input type="text" formControlName="username"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+      Usuario debe tener entre 3 y 8 caracteres
+    </ion-text>
 
-  <ion-item>
-    <ion-label position="stacked">Contraseña</ion-label>
-    <ion-input
-      [(ngModel)]="password"
-      type="password"
-      maxlength="4"
-      inputmode="numeric"
-      placeholder="****">
-    </ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+      Contraseña debe ser numérica de 4 dígitos
+    </ion-text>
 
-  <ion-button expand="block" (click)="ingresar()">Ingresar</ion-button>
-
+    <ion-button expand="block" type="submit" [disabled]="loginForm.invalid">Ingresar</ion-button>
+  </form>
 </ion-content>
