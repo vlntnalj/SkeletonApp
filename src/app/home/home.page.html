@@ -1,25 +1,53 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Home
-    </ion-title>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding" [fullscreen]="true">
+  <h2 class="ion-text-center">Bienvenida</h2>
 
-  <div id="container">
-    <strong>Bienvenido a SkeletonAPP</strong>
-    <p>Haz click para iniciar sesión:</p>
+  <!-- Mostrar usuario recibido desde Login -->
+  <ion-card *ngIf="username">
+    <ion-card-header>
+      <ion-card-title>Usuario ingresado</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <strong>{{ username }}</strong>
+    </ion-card-content>
+  </ion-card>
 
-    <!-- Botón de navegación a Login -->
-    <ion-button expand="block" [routerLink]="'/login'">
-      Iniciar sesión
-    </ion-button>
-  </div>
+  <!-- Formulario de información adicional -->
+  <form #homeForm="ngForm">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input #nombreInput type="text" [(ngModel)]="model.nombre" name="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input #apellidoInput type="text" [(ngModel)]="model.apellido" name="apellido"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nivel de educación</ion-label>
+      <ion-select [(ngModel)]="model.educacion" name="educacion">
+        <ion-select-option value="Basica">Básica</ion-select-option>
+        <ion-select-option value="Media">Media</ion-select-option>
+        <ion-select-option value="Tecnica">Técnica</ion-select-option>
+        <ion-select-option value="Universitaria">Universitaria</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Fecha Nacimiento - inicialmente con ion-datetime -->
+    <ion-item>
+      <ion-label position="floating">Fecha de Nacimiento</ion-label>
+      <ion-datetime display-format="DD/MM/YYYY" [(ngModel)]="model.fechaNacimiento" name="fechaNacimiento"></ion-datetime>
+    </ion-item>
+
+    <div class="ion-margin-top">
+      <ion-button expand="block" (click)="onLimpiar()">Limpiar</ion-button>
+      <ion-button expand="block" color="primary" (click)="onMostrar()">Mostrar</ion-button>
+    </div>
+  </form>
 </ion-content>

@@ -1,33 +1,55 @@
-<form (ngSubmit)="onLogin()" #loginForm="ngForm">
-  <ion-item>
-    <ion-label position="floating">Usuario</ion-label>
-    <ion-input
-      type="text"
-      required
-      [(ngModel)]="user.username"
-      name="username"
-      #username="ngModel">
-    </ion-input>
-  </ion-item>
-  <ion-note color="danger" *ngIf="username.invalid && username.touched">
-    El usuario es obligatorio
-  </ion-note>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-item>
-    <ion-label position="floating">Contraseña</ion-label>
-    <ion-input
-      type="password"
-      required
-      [(ngModel)]="user.password"
-      name="password"
-      #password="ngModel">
-    </ion-input>
-  </ion-item>
-  <ion-note color="danger" *ngIf="password.invalid && password.touched">
-    La contraseña es obligatoria
-  </ion-note>
+<ion-content class="ion-padding" [fullscreen]="true">
+  <h2 class="ion-text-center">Iniciar Sesión</h2>
 
-  <ion-button expand="block" type="submit" [disabled]="loginForm.invalid" class="ion-margin-top">
-    Ingresar
-  </ion-button>
-</form>
+  <!-- Usamos template-driven forms con ngModel y validaciones HTML -->
+  <form (ngSubmit)="onAgregar()" #loginForm="ngForm" novalidate>
+
+    <!-- Usuario: alfanumérico 3-8, label flotante -->
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input
+        type="text"
+        required
+        name="username"
+        [(ngModel)]="credentials.username"
+        #username="ngModel"
+        minlength="3"
+        maxlength="8"
+        pattern="^[a-zA-Z0-9]{3,8}$"
+        inputmode="text">
+      </ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="username.invalid && username.touched">
+      Usuario alfanumérico (3-8 caracteres).
+    </ion-note>
+
+    <!-- Contraseña numérica 4 dígitos, oculta -->
+    <ion-item>
+      <ion-label position="floating">Contraseña (4 dígitos)</ion-label>
+      <ion-input
+        type="password"
+        required
+        name="password"
+        [(ngModel)]="credentials.password"
+        #password="ngModel"
+        pattern="^[0-9]{4}$"
+        inputmode="numeric">
+      </ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="password.invalid && password.touched">
+      Contraseña numérica de 4 dígitos.
+    </ion-note>
+
+    <ion-button expand="block" type="submit" [disabled]="loginForm.invalid" class="ion-margin-top">
+      Agregar
+    </ion-button>
+  </form>
+
+  <ion-button expand="block" fill="clear" [routerLink]="['/home']">Volver a Home</ion-button>
+</ion-content>
