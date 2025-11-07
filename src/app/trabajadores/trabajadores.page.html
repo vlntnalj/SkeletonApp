@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Trabajadores</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Registro de Trabajador</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="trabajadorForm">
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input formControlName="nombre" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Cargo</ion-label>
+          <ion-input formControlName="cargo" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Teléfono</ion-label>
+          <ion-input formControlName="telefono" type="tel"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" color="success" (click)="guardar()">Guardar</ion-button>
+        <ion-button expand="block" color="medium" (click)="limpiar()">Limpiar</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list *ngIf="trabajadores.length > 0">
+    <ion-list-header>
+      <ion-label>Trabajadores Registrados</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let t of trabajadores">
+      <ion-label>
+        <h2>{{ t.nombre }}</h2>
+        <p>{{ t.cargo }} - {{ t.telefono }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

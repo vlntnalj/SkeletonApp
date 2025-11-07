@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Departamentos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Registro de Departamento</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="departamentoForm">
+        <ion-item>
+          <ion-label position="floating">Número de Departamento</ion-label>
+          <ion-input formControlName="numero" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Propietario</ion-label>
+          <ion-input formControlName="propietario" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Estado</ion-label>
+          <ion-input formControlName="estado" type="text"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" color="success" (click)="guardar()">Guardar</ion-button>
+        <ion-button expand="block" color="medium" (click)="limpiar()">Limpiar</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list *ngIf="departamentos.length > 0">
+    <ion-list-header>
+      <ion-label>Departamentos Registrados</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let d of departamentos">
+      <ion-label>
+        <h2>{{ d.numero }}</h2>
+        <p>{{ d.propietario }} - {{ d.estado }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

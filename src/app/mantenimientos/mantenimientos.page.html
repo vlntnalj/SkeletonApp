@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Mantenimientos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Registro de Mantenimiento</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="mantenimientoForm">
+        <ion-item>
+          <ion-label position="floating">Tipo de Mantenimiento</ion-label>
+          <ion-input formControlName="tipo" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Fecha</ion-label>
+          <ion-datetime formControlName="fecha" display-format="DD/MM/YYYY"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Responsable</ion-label>
+          <ion-input formControlName="responsable" type="text"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" color="success" (click)="guardar()">Guardar</ion-button>
+        <ion-button expand="block" color="medium" (click)="limpiar()">Limpiar</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list *ngIf="mantenimientos.length > 0">
+    <ion-list-header>
+      <ion-label>Mantenimientos Realizados</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let m of mantenimientos">
+      <ion-label>
+        <h2>{{ m.tipo }}</h2>
+        <p>{{ m.fecha }} - {{ m.responsable }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
