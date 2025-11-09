@@ -35,3 +35,33 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+/* === Estilo base para toda la app === */
+
+ion-content {
+  --background: #f8f9fc;
+}
+
+ion-card {
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin: 10px;
+}
+
+ion-card-title {
+  font-weight: 600;
+  color: #333;
+}
+
+ion-toolbar {
+  --background: #ffffff;
+  --color: #222;
+  font-weight: 500;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+ion-tab-bar {
+  --background: #ffffff;
+  --color: #808080;
+  --color-selected: #2563eb; /* Azul moderno */
+  border-top: 1px solid #e0e0e0;
+}

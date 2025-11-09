@@ -1,28 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding ion-text-center">
 
-<ion-content class="ion-padding">
-  <form [formGroup]="loginForm" (ngSubmit)="login()">
+  <img src="assets/logo.png" alt="Logo" class="logo" />
 
-    <ion-item>
-      <ion-label position="floating">Usuario</ion-label>
-      <ion-input type="text" formControlName="username"></ion-input>
-    </ion-item>
-    <ion-text color="danger" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
-      Usuario debe tener entre 3 y 8 caracteres
-    </ion-text>
+  <h2>Bienvenido</h2>
+  <p>Inicia sesión para continuar</p>
 
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
-    </ion-item>
-    <ion-text color="danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
-      Contraseña debe ser numérica de 4 dígitos
-    </ion-text>
+  <ion-item>
+    <ion-input label="Usuario" labelPlacement="floating" [(ngModel)]="username"></ion-input>
+  </ion-item>
 
-    <ion-button expand="block" type="submit" [disabled]="loginForm.invalid">Ingresar</ion-button>
-  </form>
+  <ion-item>
+    <ion-input type="password" label="Contraseña" labelPlacement="floating" [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" color="primary" class="ion-margin-top" (click)="ingresar()">
+    Ingresar
+  </ion-button>
+
+  <ion-button expand="block" fill="clear" color="medium" (click)="crearCuenta()">
+    Crear cuenta
+  </ion-button>
+
 </ion-content>

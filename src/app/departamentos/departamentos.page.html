@@ -1,47 +1,81 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Departamentos</ion-title>
+  <ion-toolbar>
+    <ion-title>Residentes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+
+  <!-- 🔍 Buscador -->
+  <ion-searchbar
+    placeholder="Buscar por número o nombre..."
+    [(ngModel)]="searchTerm"
+    (ionInput)="filtrarDepartamentos()"
+    class="custom-search">
+  </ion-searchbar>
+
+  <!-- 📊 Resumen general -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-content class="ion-text-center">
+            <ion-icon name="home-outline" color="primary" size="large"></ion-icon>
+            <h2>{{ totalOcupados }}</h2>
+            <p>Ocupados</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-content class="ion-text-center">
+            <ion-icon name="ellipse-outline" color="success" size="large"></ion-icon>
+            <h2>{{ totalVacios }}</h2>
+            <p>Vacíos</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-content class="ion-text-center">
+            <ion-icon name="alert-circle-outline" color="danger" size="large"></ion-icon>
+            <h2>{{ totalMorosos }}</h2>
+            <p>Morosos</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- 🏘️ Lista de Residentes -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Registro de Departamento</ion-card-title>
+      <ion-card-title>Listado de Residentes</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <form [formGroup]="departamentoForm">
-        <ion-item>
-          <ion-label position="floating">Número de Departamento</ion-label>
-          <ion-input formControlName="numero" type="text"></ion-input>
-        </ion-item>
+      <ion-list>
+        <ion-item *ngFor="let d of departamentosFiltrados" class="resident-item">
+          <ion-icon name="person-circle-outline" slot="start" color="medium"></ion-icon>
+          <ion-label>
+            <h2><strong>Dpto {{ d.numero }}</strong> — {{ d.nombre }}</h2>
+            <p>📞 {{ d.telefono }}</p>
+            <p>✉️ {{ d.correo }}</p>
+          </ion-label>
 
-        <ion-item>
-          <ion-label position="floating">Propietario</ion-label>
-          <ion-input formControlName="propietario" type="text"></ion-input>
+          <ion-badge
+            [color]="
+              d.estadoPago === 'Al día' ? 'success' :
+              d.estadoPago === 'Pendiente' ? 'warning' : 
+              d.estadoPago === 'Vacío' ? 'medium' : 'danger'
+            ">
+            {{ d.estadoPago }}
+          </ion-badge>
         </ion-item>
-
-        <ion-item>
-          <ion-label position="floating">Estado</ion-label>
-          <ion-input formControlName="estado" type="text"></ion-input>
-        </ion-item>
-
-        <ion-button expand="block" color="success" (click)="guardar()">Guardar</ion-button>
-        <ion-button expand="block" color="medium" (click)="limpiar()">Limpiar</ion-button>
-      </form>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 
-  <ion-list *ngIf="departamentos.length > 0">
-    <ion-list-header>
-      <ion-label>Departamentos Registrados</ion-label>
-    </ion-list-header>
-    <ion-item *ngFor="let d of departamentos">
-      <ion-label>
-        <h2>{{ d.numero }}</h2>
-        <p>{{ d.propietario }} - {{ d.estado }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
 </ion-content>

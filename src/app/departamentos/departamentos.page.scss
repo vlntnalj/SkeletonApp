@@ -1,0 +1,31 @@
+ion-content {
+  --background: #f8f9fc;
+}
+
+ion-card {
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+ion-card-title {
+  font-weight: 600;
+  color: #333;
+}
+
+.custom-search {
+  --background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.resident-item {
+  border-radius: 10px;
+  margin-bottom: 6px;
+  --background: #ffffff;
+}
+
+ion-badge {
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+}

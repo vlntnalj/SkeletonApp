@@ -1,48 +1,80 @@
-<!-- src/app/home/home.page.html -->
-
 <ion-header>
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Edificio Torres del Sol</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="medium" routerLink="/login">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-  <h2>Bienvenido, {{ username }}</h2>
+  <ion-text color="medium">
+    <h6>Administración</h6>
+  </ion-text>
 
-  <!-- Nombre -->
-  <ion-item [@slideInput]="animarNombre ? 'end' : 'start'">
-    <ion-label position="floating">Nombre</ion-label>
-    <ion-input [(ngModel)]="nombre"></ion-input>
-  </ion-item>
+  <!-- === Tarjetas principales === -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-content class="ion-text-center">
+            <ion-icon name="people-outline" size="large" color="primary"></ion-icon>
+            <h2>48</h2>
+            <p>Total Unidades</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-content class="ion-text-center">
+            <ion-icon name="checkmark-circle-outline" size="large" color="success"></ion-icon>
+            <h2>42</h2>
+            <p>Ocupadas</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
 
-  <!-- Apellido -->
-  <ion-item [@slideInput]="animarApellido ? 'end' : 'start'">
-    <ion-label position="floating">Apellido</ion-label>
-    <ion-input [(ngModel)]="apellido"></ion-input>
-  </ion-item>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-content class="ion-text-center">
+            <ion-icon name="cash-outline" size="large" color="warning"></ion-icon>
+            <h2>8</h2>
+            <p>Pagos Pendientes</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card>
+          <ion-card-content class="ion-text-center">
+            <ion-icon name="construct-outline" size="large" color="danger"></ion-icon>
+            <h2>5</h2>
+            <p>Reportes Abiertos</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <!-- Nivel educación -->
-  <ion-item>
-    <ion-label position="floating">Nivel de educación</ion-label>
-    <ion-input [(ngModel)]="nivel"></ion-input>
-  </ion-item>
-
-  <!-- Fecha de nacimiento -->
-  <mat-form-field appearance="fill" style="width: 100%; margin-top: 15px;">
-    <mat-label>Fecha de Nacimiento</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="fechaNacimiento">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <!-- Botones -->
-  <ion-button expand="block" color="medium" (click)="limpiarCampos()" style="margin-top: 20px;">
-    Limpiar
-  </ion-button>
-
-  <ion-button expand="block" color="primary" (click)="mostrarDatos()">
-    Mostrar
-  </ion-button>
+  <!-- === Acciones rápidas === -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Acciones Rápidas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" color="primary" routerLink="/tabs/mantencion">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Nuevo Reporte
+      </ion-button>
+      <ion-button expand="block" color="success" routerLink="/tabs/pagos">
+        <ion-icon name="card-outline" slot="start"></ion-icon>
+        Registrar Pago
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

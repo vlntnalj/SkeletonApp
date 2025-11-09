@@ -1,74 +1,35 @@
-// src/app/home/home.page.ts
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { trigger, state, style, animate, transition } from '@angular/animations';
-
-// Angular Material Imports
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule
-  ],
-  animations: [
-    trigger('slideInput', [
-      state('start', style({ transform: 'translateX(0)' })),
-      state('end', style({ transform: 'translateX(0)' })),
-      transition('start => end', [
-        animate('1s ease', style({ transform: 'translateX(50px)' }))
-      ])
-    ])
-  ]
+  imports: [IonicModule, CommonModule],
 })
 export class HomePage {
-  username: string = '';
-  nombre: string = '';
-  apellido: string = '';
-  nivel: string = '';
-  fechaNacimiento: any;
+  username = 'Administrador';
+  totalUnidades = 40;
+  unidadesOcupadas = 34;
+  pagosPendientes = 6;
+  reportesAbiertos = 3;
 
-  animarNombre: boolean = false;
-  animarApellido: boolean = false;
+  actividadReciente = [
+    { titulo: 'Pago recibido de Dpto 203', fecha: '08/11/2025' },
+    { titulo: 'Nuevo reporte de filtración', fecha: '07/11/2025' },
+  ];
 
-  constructor(private router: Router) {
-    const nav = this.router.getCurrentNavigation();
-    if (nav?.extras.state) {
-      this.username = nav.extras.state['username'];
-    }
-  }
+  proximasTareas = [
+    { descripcion: 'Revisión ascensor', fecha: '09/11/2025' },
+    { descripcion: 'Limpieza de cisterna', fecha: '11/11/2025' },
+  ];
 
-  limpiarCampos() {
-    this.animarNombre = true;
-    this.animarApellido = true;
+  constructor(private router: Router) {}
 
-    setTimeout(() => {
-      this.animarNombre = false;
-      this.animarApellido = false;
-    }, 1000); // duración 1 segundo
-
-    this.nombre = '';
-    this.apellido = '';
-    this.nivel = '';
-    this.fechaNacimiento = '';
-  }
-
-  mostrarDatos() {
-    alert(`Usuario: ${this.username}\nNombre: ${this.nombre}\nApellido: ${this.apellido}`);
+  goTo(path: string) {
+    this.router.navigate(['/' + path]);
   }
 }

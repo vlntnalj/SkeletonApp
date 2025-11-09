@@ -1,0 +1,100 @@
+ion-content {
+  --background: #f8f9fa;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  color: #333;
+}
+
+/* Tarjetas modernas */
+.modern-card {
+  margin: 16px;
+  border-radius: 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modern-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+ion-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #4a4a4a;
+}
+
+ion-card-subtitle {
+  color: #777;
+}
+
+/* Gráfico de barras simple */
+.grafico-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 150px;
+  margin: 20px 0;
+}
+
+.grafico-barra {
+  flex: 1;
+  margin: 0 6px;
+  text-align: center;
+  color: #fff;
+  border-radius: 10px;
+  padding-top: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.cobrados {
+  background: #2ecc71;
+}
+
+.pendientes {
+  background: #f1c40f;
+  color: #000;
+}
+
+.vencidos {
+  background: #e74c3c;
+}
+
+.leyenda {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* Estado de departamentos */
+.text-success {
+  color: #2ecc71;
+}
+
+.text-warning {
+  color: #f1c40f;
+}
+
+.text-danger {
+  color: #e74c3c;
+}
+
+/* Lista de pagos */
+.pagos-list {
+  background: transparent;
+}
+
+.pago-item {
+  border-radius: 12px;
+  background: #fafafa;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+}
+
+.estado-badge {
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  border-radius: 10px;
+}

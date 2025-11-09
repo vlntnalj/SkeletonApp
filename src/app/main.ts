@@ -1,8 +1,13 @@
 import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { routes } from './app/app.routes';
 import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
+import { importProvidersFrom } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 
-bootstrapApplication(LoginPage, {
-  providers: [provideRouter(routes)],
-}).catch(err => console.error(err));
-import { LoginPage } from './login/login.page';
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes),
+    importProvidersFrom(IonicModule.forRoot({}))
+  ]
+});

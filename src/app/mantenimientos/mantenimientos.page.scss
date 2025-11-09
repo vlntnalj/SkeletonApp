@@ -1,0 +1,45 @@
+ion-content {
+  --background: #f8f9fc;
+}
+
+ion-card {
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 12px;
+  transition: transform 0.2s ease;
+}
+
+ion-card:hover {
+  transform: scale(1.01);
+}
+
+ion-card-title {
+  font-weight: 600;
+  color: #333;
+}
+
+ion-card-subtitle {
+  font-size: 0.9rem;
+}
+
+.custom-segment {
+  margin-bottom: 16px;
+}
+
+ion-segment-button {
+  text-transform: capitalize;
+}
+
+ion-icon {
+  margin-right: 6px;
+}
+
+ion-item {
+  --background: transparent;
+  --color: #555;
+  font-size: 0.9rem;
+}
+
+ion-fab-button {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
