@@ -1,32 +1,89 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonContent, IonHeader, IonToolbar, IonTitle, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonChip, IonGrid, IonRow, IonCol, IonList, IonItem, IonLabel, IonBadge } from '@ionic/angular/standalone';
+import { Component, OnInit } from '@angular/core';
+import { AnimationController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pagos',
   templateUrl: './pagos.page.html',
   styleUrls: ['./pagos.page.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    IonContent, IonHeader, IonToolbar, IonTitle,
-    IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
-    IonChip, IonGrid, IonRow, IonCol, IonList, IonItem, IonLabel, IonBadge
-  ]
 })
-export class PagosPage {
+export class PagosPage implements OnInit {
 
-  // Datos del resumen
-  departamentosPagados = 25;
-  departamentosPendientes = 8;
-  departamentosVencidos = 3;
+  
+  departamentosPagados = 8;
+  departamentosPendientes = 3;
+  departamentosVencidos = 2;
 
-  // Lista de ejemplos de pagos
   pagos = [
-    { departamento: 101, residente: 'Laura Pérez', fecha: '2025-11-01', monto: 85000, estado: 'Pagado', estadoColor: 'success' },
-    { departamento: 203, residente: 'Carlos Soto', fecha: '2025-11-03', monto: 87000, estado: 'Pendiente', estadoColor: 'warning' },
-    { departamento: 307, residente: 'Andrea Mella', fecha: '2025-10-28', monto: 90000, estado: 'Vencido', estadoColor: 'danger' },
-    { departamento: 402, residente: 'Luis Rojas', fecha: '2025-11-02', monto: 86000, estado: 'Pagado', estadoColor: 'success' },
-    { departamento: 509, residente: 'María Gutiérrez', fecha: '2025-11-04', monto: 91000, estado: 'Pendiente', estadoColor: 'warning' },
+    { departamento: 101, residente: 'María López', fecha: '01/11/2025', monto: 55000, estado: 'Pagado', estadoColor: 'success' },
+    { departamento: 204, residente: 'Carlos Díaz', fecha: '03/11/2025', monto: 60000, estado: 'Pendiente', estadoColor: 'warning' },
+    { departamento: 305, residente: 'Ana Torres', fecha: '05/11/2025', monto: 58000, estado: 'Vencido', estadoColor: 'danger' },
   ];
+
+  constructor(private animationCtrl: AnimationController) {}
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.animarTitulo();
+      this.animarTarjetas();
+      this.animarBotones();
+      this.animarLista();
+    }, 300);
+  }
+
+  animarTitulo() {
+    const titulo = document.querySelector('ion-title');
+    if (titulo) {
+      this.animationCtrl.create()
+        .addElement(titulo)
+        .duration(1000)
+        .iterations(1)
+        .fromTo('opacity', '0', '1')
+        .fromTo('transform', 'translateY(-20px)', 'translateY(0)')
+        .easing('ease-out')
+        .play();
+    }
+  }
+
+  animarTarjetas() {
+    const tarjetas = document.querySelectorAll('ion-card');
+    tarjetas.forEach((card, i) => {
+      this.animationCtrl.create()
+        .addElement(card)
+        .duration(800)
+        .delay(i * 200)
+        .fromTo('transform', 'translateY(50px)', 'translateY(0)')
+        .fromTo('opacity', '0', '1')
+        .easing('ease-out')
+        .play();
+    });
+  }
+
+
+  animarBotones() {
+    const chips = document.querySelectorAll('ion-chip');
+    chips.forEach((chip) => {
+      this.animationCtrl.create()
+        .addElement(chip)
+        .duration(800)
+        .iterations(Infinity)
+        .direction('alternate')
+        .fromTo('transform', 'scale(1)', 'scale(1.05)')
+        .easing('ease-in-out')
+        .play();
+    });
+  }
+
+  animarLista() {
+    const items = document.querySelectorAll('ion-item');
+    items.forEach((item, i) => {
+      this.animationCtrl.create()
+        .addElement(item)
+        .duration(700)
+        .delay(i * 120)
+        .fromTo('transform', 'translateX(-40px)', 'translateX(0)')
+        .fromTo('opacity', '0', '1')
+        .easing('ease-out')
+        .play();
+    });
+  }
 }
