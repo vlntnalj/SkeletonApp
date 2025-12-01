@@ -6,6 +6,16 @@
 
 <ion-content class="ion-padding">
 
+  <!-- 🔹 Animación Lottie -->
+  <ion-card class="fade-in slide-up ion-text-center">
+    <ion-card-content>
+      <ng-lottie
+        [options]="{ path: '/assets/animations/pagos.json' }"
+        style="width: 180px; margin: 0 auto; display: block;">
+      </ng-lottie>
+    </ion-card-content>
+  </ion-card>
+
   <!-- 🔹 Resumen de Cobranzas -->
   <ion-card class="modern-card">
     <ion-card-header>
@@ -29,7 +39,7 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- 🔹 Estado de departamentos -->
+  <!-- 🔹 Estado de Departamentos -->
   <ion-card class="modern-card">
     <ion-card-header>
       <ion-card-title>Estado de Departamentos</ion-card-title>
@@ -59,6 +69,7 @@
     <ion-card-header>
       <ion-card-title>Detalle de Pagos Recientes</ion-card-title>
     </ion-card-header>
+
     <ion-card-content>
       <ion-list class="pagos-list">
         <ion-item *ngFor="let pago of pagos" lines="none" class="pago-item">
@@ -66,7 +77,12 @@
             <h2>Depto {{ pago.departamento }} - {{ pago.residente }}</h2>
             <p>Fecha: {{ pago.fecha }} • Monto: ${{ pago.monto | number:'1.0-0' }}</p>
           </ion-label>
-          <ion-badge [color]="pago.estadoColor" class="estado-badge">{{ pago.estado }}</ion-badge>
+
+          <!-- 🟩 Badge de estado -->
+          <ion-badge [color]="pago.estadoColor" class="estado-badge">
+            {{ pago.estado }}
+          </ion-badge>
+
         </ion-item>
       </ion-list>
     </ion-card-content>
